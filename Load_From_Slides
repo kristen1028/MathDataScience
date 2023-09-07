@@ -28,4 +28,4 @@ def get_slides(url):
     return images
 ```
 
-image_list = 
+image_list = get_slides(Data_Deck)
