@@ -18,6 +18,7 @@ import wandb as wb
 from skimage.io import imread
 ```
 # Define functions for GPU operations and plotting
+```python
 def GPU(data):
     return torch.tensor(data, requires_grad=True, dtype=torch.float, device=torch.device('cuda'))
 
@@ -47,12 +48,14 @@ def montage_plot(x):
     """
     x = np.pad(x, pad_width=((0, 0), (1, 1), (1, 1)), mode='constant', constant_values=0)
     plot(montage(x))
-
+```
 # Load MNIST dataset
+```python
 train_set = datasets.MNIST('./data', train=True, download=True)
 test_set = datasets.MNIST('./data', train=False, download=True)
-
+```
 # Preprocess image data
+```python
 X = train_set.data.numpy()
 X_test = test_set.data.numpy()
 Y = train_set.targets.numpy()
@@ -60,10 +63,11 @@ Y_test = test_set.targets.numpy()
 
 X = X[:, None, :, :] / 255
 X_test = X_test[:, None, :, :] / 255
-
+```
 # Display the shape of X
+```python
 X.shape
-
+```
 # Display the shape of a subset of X
 X[0:25, 0, :, :].shape
 
