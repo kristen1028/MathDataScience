@@ -97,6 +97,7 @@ This line of code displays a montage of the first 25 images selected from the pr
 X = X.reshape(X.shape[0], 784)
 X_test = X_test.reshape(X_test.shape[0], 784)
 ```
+This code block reshapes each image in the training and tetsing datasets to 784 columns. 
 
 # Convert data to GPU tensors
 ```python
