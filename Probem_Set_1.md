@@ -19,7 +19,7 @@ import wandb as wb
 from skimage.io import imread
 ```
 # Define functions for GPU operations and plotting
-
+```python
 def GPU(data):
     return torch.tensor(data, requires_grad=True, dtype=torch.float, device=torch.device('cuda'))
 
@@ -49,14 +49,15 @@ def montage_plot(x):
     """
     x = np.pad(x, pad_width=((0, 0), (1, 1), (1, 1)), mode='constant', constant_values=0)
     plot(montage(x))
-
+```
 # Load MNIST dataset
-
+```python
 train_set = datasets.MNIST('./data', train=True, download=True)
 test_set = datasets.MNIST('./data', train=False, download=True)
+```
 
 # Preprocess image data
-
+```python
 X = train_set.data.numpy()
 X_test = test_set.data.numpy()
 Y = train_set.targets.numpy()
@@ -64,58 +65,87 @@ Y_test = test_set.targets.numpy()
 
 X = X[:, None, :, :] / 255
 X_test = X_test[:, None, :, :] / 255
+```
 
 # Display the shape of X
+```python
 X.shape
+```
 # Display the shape of a subset of X
+```python
 X[0:25, 0, :, :].shape
+```
 
 # Plot a montage of images
+```python
 montage_plot(X[125:150, 0, :, :])
+```
 
 # Reshape image tensors
+```python
 X = X.reshape(X.shape[0], 784)
 X_test = X_test.reshape(X_test.shape[0], 784)
+```
 
 # Convert data to GPU tensors
+```python
 X = GPU_data(X)
 Y = GPU_data(Y)
 X_test = GPU_data(X_test)
 Y_test = GPU_data(Y_test)
+```
 
 # Display the shape of X
+```python
 X.shape
+```
 
 # Extract a subset of X
+```python
 x = X[:, 0:64]
+```
 
 # Transpose X
+```python
 X = X.T
+```
 
 # Display the shape of X
+```python
 X.shape
+```
 
 # Create a random model 'M' and perform matrix multiplication
+```python
 M = GPU(np.random.rand(10, 784))
+```
 
 # Set batch size
+```python
 batch_size = 64
+```
 
 # Extract a batch of image data
+```python
 x = X[:, 0:batch_size]
+```
 
 # Update the random model and perform matrix multiplication
+```python
 M = GPU(np.random.rand(10, 784))
 y = M @ x
+```
 
 # Calculate accuracy based on model predictions
+```python
 y = torch.argmax(y, 0)
 torch.sum((y == Y[0:batch_size])) / batch_size
+```
 
 # Train a random walk model to achieve at least 75% accuracy
+```python
 m_best = 0
 acc_best = 0
-
 for i in range(100000):
     step = 0.0000000001
     m_random = GPU_data(np.random.randn(10, 784))
