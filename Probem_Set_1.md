@@ -136,6 +136,7 @@ This code expresses the shape of the array (X) in terms of dimension, and provid
 ```python
 M = GPU(np.random.rand(10, 784))
 ```
+This line of code generates a random array representing 10 samples with 784 features each, converts it to a PyTorch tensor, sets it up for gradient computation, and places it on a CUDA device, assigning the resulting tensor to the variable M.
 
 # Set batch size
 ```python
