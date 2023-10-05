@@ -124,6 +124,7 @@ This line of code creates a new array (x), by selected the first 64 columns for 
 ```python
 X = X.T
 ```
+This line of code transforms the original array (X) by effectively swapping the rows and columns. 
 
 # Display the shape of X
 ```python
