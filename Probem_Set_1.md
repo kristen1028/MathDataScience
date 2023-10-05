@@ -18,7 +18,7 @@ from skimage.util import montage
 import wandb as wb
 from skimage.io import imread
 ```
-" in this code block, "
+ in this code block, 
 
 # Define functions for GPU operations and plotting
 ```python
