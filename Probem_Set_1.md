@@ -52,7 +52,7 @@ def montage_plot(x):
     x = np.pad(x, pad_width=((0, 0), (1, 1), (1, 1)), mode='constant', constant_values=0)
     plot(montage(x))
 ```
-"GPU(data)" This code block allows me to use GPU tensors, plot single images, and create montages of multiple images for visualization. 
+"GPU(data)" inputs data and outputs a PyTorch tensor. The tensor is created with the input data, with the "requires_grad" attribute set to "True" indicating that gradients should be computed for this tensor. "GPU_dat(data)" also inputs data and outputs a PyTorch tensor. But,the "requires_grad" attribute is set to "False", which indicates that gradiants do not need to be computed for this tensor. Overall, this code block allows me to use GPU tensors, plot single images, and create montages of multiple images for visualization. 
 
 # Load MNIST dataset
 ```python
