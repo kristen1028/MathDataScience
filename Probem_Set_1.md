@@ -106,6 +106,7 @@ Y = GPU_data(Y)
 X_test = GPU_data(X_test)
 Y_test = GPU_data(Y_test)
 ```
+This code block is converting the NumPy arrays (X, Y, X_test, Y_test) into PyTorch tensors and putting them on a CUDA device. 
 
 # Display the shape of X
 ```python
