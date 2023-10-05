@@ -17,7 +17,7 @@ from skimage.util import montage
 !pip install wandb
 import wandb as wb
 from skimage.io import imread
-
+In this code block,
 # Define functions for GPU operations and plotting
 def GPU(data):
     return torch.tensor(data, requires_grad=True, dtype=torch.float, device=torch.device('cuda'))
