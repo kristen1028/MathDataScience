@@ -20,6 +20,7 @@ from skimage.io import imread
 ```
 
 # Define functions for GPU operations and plotting
+```python
 def GPU(data):
     return torch.tensor(data, requires_grad=True, dtype=torch.float, device=torch.device('cuda'))
 
