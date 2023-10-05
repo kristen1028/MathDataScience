@@ -184,4 +184,4 @@ for i in range(100000):
         m_best = m
         acc_best = acc
 ```
-I reached 87.3% accuracy. This code block is updating a base model (m_best) using small random perturbations and selecting the model that achieves the highest accuracy on the given dataset (X and Y). The loop runs for 100,000 iterations. The step size for the perturbations is set to a very small value (0.0000000001). if the current accuracy is better than the best accuracy found so far, it is printed, and "M_best" and "accuracy_best" are updated with the new model and accuracy. 
+I reached 87.3% accuracy. This code block is updating a base model (m_best) using small random perturbations and selecting the model that achieves the highest accuracy on the given dataset (X and Y). The loop runs for 100,000 iterations. The step size for the perturbations is set to a very small value (0.0000000001). If the current accuracy is better than the best accuracy found so far, it is printed, and "M_best" and "accuracy_best" are updated with the new model and accuracy. 
