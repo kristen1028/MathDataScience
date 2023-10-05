@@ -112,6 +112,7 @@ This code block is converting the NumPy arrays (X, Y, X_test, Y_test) into PyTor
 ```python
 X.shape
 ```
+This code expresses the shape of the array (X) in terms of dimension, and provides information about the number of elements along each axis of the array.
 
 # Extract a subset of X
 ```python
@@ -127,6 +128,7 @@ X = X.T
 ```python
 X.shape
 ```
+This code expresses the shape of the array (X) in terms of dimension, and provides information about the number of elements along each axis of the array.
 
 # Create a random model 'M' and perform matrix multiplication
 ```python
