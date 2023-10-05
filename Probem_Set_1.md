@@ -71,6 +71,7 @@ Y_test = test_set.targets.numpy()
 X = X[:, None, :, :] / 255
 X_test = X_test[:, None, :, :] / 255
 ```
+This code block preprocesses the MNIST training and testing data to extract the images and labels by converting them to NumPy arrays, adjusts the dimensions of the images to include a channel dimesion, and normalizes the pixel values. 
 
 # Display the shape of X
 ```python
