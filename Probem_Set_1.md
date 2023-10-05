@@ -82,6 +82,7 @@ X[0:25, 0, :, :].shape
 ```python
 montage_plot(X[125:150, 0, :, :])
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/d2d0dee9-a357-4512-b5c2-2453a1902ec9)
 
 # Reshape image tensors
 ```python
