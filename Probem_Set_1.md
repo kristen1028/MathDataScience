@@ -59,6 +59,7 @@ def montage_plot(x):
 train_set = datasets.MNIST('./data', train=True, download=True)
 test_set = datasets.MNIST('./data', train=False, download=True)
 ```
+The "train_set" line of code creates a training dataset object using the MNIST dataset. The "test_set" line of code creates a testing dataset object using the MNIST dataset. 
 
 # Preprocess image data
 ```python
