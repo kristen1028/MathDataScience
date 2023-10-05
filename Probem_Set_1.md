@@ -18,7 +18,7 @@ from skimage.util import montage
 import wandb as wb
 from skimage.io import imread
 ```
- in this code block, 
+In this code block, I am importing the libraries I need for this code to run, such as NumPy, Matplotlib, Torch, datatsets from Torchvision, montages from skimage.util, and Wandb.  
 
 # Define functions for GPU operations and plotting
 ```python
