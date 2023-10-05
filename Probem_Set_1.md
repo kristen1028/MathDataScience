@@ -77,6 +77,8 @@ This code block preprocesses the MNIST training and testing data to extract the 
 ```python
 X.shape
 ```
+This code expresses the shape of the array (X) in terms of dimension, and provides information about the number of elements along each axis of the array. 
+
 # Display the shape of a subset of X
 ```python
 X[0:25, 0, :, :].shape
