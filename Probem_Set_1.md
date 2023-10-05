@@ -118,6 +118,7 @@ This code expresses the shape of the array (X) in terms of dimension, and provid
 ```python
 x = X[:, 0:64]
 ```
+This line of code creates a new array (x), by selected the first 64 columns for every row from the original array (X). 
 
 # Transpose X
 ```python
