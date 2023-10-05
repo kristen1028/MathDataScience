@@ -90,6 +90,7 @@ This code selects the first 25 images. The first dimension will show the number 
 montage_plot(X[125:150, 0, :, :])
 ```
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/d2d0dee9-a357-4512-b5c2-2453a1902ec9)
+This line of code displays a montage of the first 25 images selected from the previous line of code. 
 
 # Reshape image tensors
 ```python
