@@ -83,6 +83,7 @@ This code expresses the shape of the array (X) in terms of dimension, and provid
 ```python
 X[0:25, 0, :, :].shape
 ```
+This code selects the first 25 images. The first dimension will show the number of selected sample (25), and the second and third dimesnion will show the height and width of each selected image. 
 
 # Plot a montage of images
 ```python
