@@ -58,11 +58,15 @@ This code resizes and plots the image from the URL to 224x224.
 image_gray = np.mean(image_resize, axis=2)
 plot(image_gray)  # Display the grayscale image
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a19ac5b0-b87b-4564-8f04-219a140258f4)
+
+This code converts a resized color image into grayscale and then displays the grayscale image.
 
 # Define a convolution filter 'a'
 ```python
 a = np.matrix([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
 ```
+This code creates a 3x3 matrix a with specific values using the np.matrix() function from the NumPy library. 
 
 # Convolve the grayscale image with the filter 'a' and display the results
 ```python
@@ -72,6 +76,7 @@ plot(x)
 plot(x2)
 ```
 
+This code block takes a grayscale image, applies edge detection using a filter, and displays both the original and the edge-detected images.
 # Define a function for 2D convolution
 ```python
 def conv2(x, f):
