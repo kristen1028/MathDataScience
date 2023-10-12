@@ -25,6 +25,7 @@ import wandb as wb
 from skimage.io import imread
 from skimage.transform import resize
 ```
+This code block imports various libraries and tools required for image processing, data handling, visualization, and machine learning tasks.
 
 # Function to plot images
 ```python
@@ -35,7 +36,7 @@ def plot(x):
     fig.set_size_inches(5, 5)
     plt.show()
 ```
-
+The plot() function visualizes the input matrix x as a grayscale image in a 5x5 inch figure without any axis ticks or borders.
 
 # Load an RGB image from a URL
 ```python
