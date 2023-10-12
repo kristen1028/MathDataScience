@@ -1,4 +1,5 @@
 # Import necessary libraries and modules
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import base64
@@ -11,6 +12,7 @@ from skimage.util import montage
 import wandb as wb
 from skimage.io import imread
 from skimage.transform import resize
+```
 
 # Define a function to plot an image
 def plot(x):
