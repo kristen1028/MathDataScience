@@ -21,6 +21,7 @@ import wandb as wb
 from skimage.io import imread
 from skimage.transform import resize
 ```
+This code block sets up the environment for a project that involves image processing, convolution operations, visualization, and possibly machine learning training with experiment tracking.
 
 # Define a function to plot an image
 ```python
@@ -31,6 +32,7 @@ def plot(x):
     fig.set_size_inches(5, 5)
     plt.show()
 ```
+The plot() function with an image will display that image in a grayscale format, without any axis, and with a size of 5x5 inches.
 
 # Load an RGB image from a URL and display it
 ```python
@@ -38,6 +40,9 @@ image = io.imread("https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=
 image = image[:, :, :]  # Keep all color channels
 plot(image)  # Display the image
 ```
+This display the images selected from a URL. 
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/b4f518dc-eaba-44c3-86c2-d52fbc46acac)
+
 
 # Resize the image to 224x224 and display the resized image
 ```python
