@@ -15,36 +15,49 @@ from skimage.transform import resize
 ```
 
 # Define a function to plot an image
+```python
 def plot(x):
     fig, ax = plt.subplots()
     im = ax.imshow(x, cmap='gray')
     ax.axis('off')
     fig.set_size_inches(5, 5)
     plt.show()
+```
 
 # Load an RGB image from a URL and display it
+```python
 image = io.imread("https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=ImgDet&rs=1")
 image = image[:, :, :]  # Keep all color channels
 plot(image)  # Display the image
+```
 
 # Resize the image to 224x224 and display the resized image
+```python
 image_resize = resize(image, (224, 224))
 plot(image_resize)  # Display the resized image
+```
 
 # Convert the resized image to grayscale and display it
+```python
 image_gray = np.mean(image_resize, axis=2)
 plot(image_gray)  # Display the grayscale image
+```
 
 # Define a convolution filter 'a'
+```python
 a = np.matrix([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
+```
 
 # Convolve the grayscale image with the filter 'a' and display the results
+```python
 x = image_gray
 x2 = conv2(x, a)
 plot(x)
 plot(x2)
+```
 
 # Define a function for 2D convolution
+```python
 def conv2(x, f):
     x2 = np.zeros(x.shape)
     for i in range(1, x.shape[0] - 1):
@@ -61,22 +74,28 @@ def conv2(x, f):
                 + f[2, 2] * x[i + 1, j + 1]
             )
     return x2
+```
 
 # Apply convolution with 10 random filters and display the results
+```python
 for i in range(10):
     a = 2 * np.random.random((3, 3)) - 1
     print(a)
     z = conv2(x, a)
     plot(z)
-
+```
 # Load an RGB image from a URL and convert it to grayscale
+```python
 img_url = "https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=ImgDet&rs=1"
 img = io.imread(img_url)
 x = color.rgb2gray(img)
+```
 
 # Apply convolution with 10 more random filters and display the results
+```python
 for i in range(10):
     a = 2 * np.random.random((3, 3)) - 1
     print(a)
     z = convolve2d(x, a, mode='valid')  # 2D convolution
     plot(z)
+```
