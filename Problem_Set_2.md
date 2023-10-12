@@ -230,4 +230,5 @@ for i in range(10):
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/c2fc5c97-8fca-4d6c-b62b-ff6823ff58b9)
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/4eabd30e-fb38-4134-b6c2-3f5407605a4e)
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/f3f04502-636b-463a-95b0-47138fe77688)
+
 The code applies 10 random 3x3 filters (convolution kernels) to the grayscale image x and visualizes the output of each convolution.
