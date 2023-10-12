@@ -41,6 +41,7 @@ image = image[:, :, :]  # Keep all color channels
 plot(image)  # Display the image
 ```
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/b4f518dc-eaba-44c3-86c2-d52fbc46acac)
+
 This displays the image selected from a URL.
 
 # Resize the image to 224x224 and display the resized image
