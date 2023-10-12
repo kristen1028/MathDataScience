@@ -40,9 +40,8 @@ image = io.imread("https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=
 image = image[:, :, :]  # Keep all color channels
 plot(image)  # Display the image
 ```
-This display the images selected from a URL. 
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/b4f518dc-eaba-44c3-86c2-d52fbc46acac)
-
+This display the images selected from a URL.
 
 # Resize the image to 224x224 and display the resized image
 ```python
