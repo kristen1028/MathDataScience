@@ -210,6 +210,7 @@ img_url = "https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=ImgDet&r
 img = io.imread(img_url)
 x = color.rgb2gray(img)
 ```
+The code fetches an image from a specified URL and then converts it to grayscale.
 
 # Display the convoluted images using 10 different random filters
 ```python
@@ -219,3 +220,5 @@ for i in range(10):
     z = convolve2d(x, a, mode='valid')  # 2D convolution
     plot(z)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/65268aee-ee22-44d1-919b-bace8cc0f1e7)
+
