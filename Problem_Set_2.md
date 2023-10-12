@@ -44,28 +44,39 @@ image = io.imread("https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=
 image = image[:, :, :3]
 plot(image)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a54a15c6-c436-454b-bd67-104b856453a1)
+
+The code fetches an image from the URL, ensures it's represented in the RGB format, and then displays the image in color using a plot() function.
 
 # Display the shape of the image
 ```python
 image.shape
 ```
+This code displays the shape of the original URL image
 
 # Resize the image to 224x224
 ```python
 image_resize = resize(image, (224, 224))
 plot(image_resize)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/39f6f64f-a833-4ef1-b638-d9314812e9cd)
+
+This code resized the original URL image to 224x224 and displays it using a plot() function. 
 
 # Display the shape of the resized image
 ```python
 image_resize.shape
 ```
+This code displays the shape of the resized URL image, ensuring that the image has been resized to the correct measurements. 
 
 # Convert the resized image to grayscale and plot image
 ```python
 image_gray = np.mean(image_resize, axis=2)
 plot(image_gray)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/9a903207-b60f-437d-8975-564f50524cdf)
+
+The code converts the resized color image (image_resize) to grayscale by computing the mean of the RGB values across the third dimension (np.mean(image_resize, axis=2)). It then displays the grayscale image using the plot() function.
 
 # Load the image again for further processing
 ```python
@@ -75,11 +86,15 @@ image = image.astype(float)
 image /= 255.0
 plot(image)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/719424b0-2a0a-4408-a52f-cf27d2544037)
+
+The code downloads an image from the previously used URL, extracts its red channel, normalizes its pixel values to the range [0, 1], and then displays the grayscale version of the red channel.
 
 # Define a filter (kernel)
 ```python
 a = np.matrix([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
 ```
+The code creates a 3x3 matrix a with the specified values using the numpy library.
 
 # Apply the filter to the image
 ```python
@@ -87,6 +102,7 @@ x = image
 f = a
 x2 = np.zeros(x.shape)
 ```
+The code initializes three variables: it sets x with the content of image, assigns f with the content of a, and creates a zero matrix x2 with the same shape as x.
 
 # Convolution operation
 ```python
@@ -102,15 +118,23 @@ for i in range(1, x.shape[0] - 1):
                     + f[2, 1] * x[i + 1, j]
                     + f[2, 2] * x[i + 1, j + 1])
 ```
+The code manually performs a convolution operation on an image matrix x using a 3x3 filter f, storing the result in matrix x2. It iterates over the image, multiplies neighboring pixels by the filter values, and sums them for the corresponding output pixel in x2.
 
 # Plot the original image
 ```python
 plot(x)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/87bebc14-4072-40b2-ba48-64a6448afaa3)
+
+Plots the original grayscale image. 
+
 # Plot the convoluted image
 ```python
 plot(x2)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/4a288387-dac0-42bf-a329-16f3e67bef30)
+
+Plots the convoluted grayscale image. 
 
 # Function to perform convolution
 ```python
@@ -129,26 +153,35 @@ def conv2(x, f):
                         + f[2, 2] * x[i + 1, j + 1])
     return x2
 ```
+The code defines a function conv2 that performs a convolution operation on a 2D matrix x using a 3x3 filter f. It iterates over the matrix, multiplies neighboring elements by the filter values, and accumulates them to produce a corresponding output element in the resulting matrix x2. The function then returns this convolved matrix x2.
 
 # Define a different filter
 ```python
 a = np.matrix([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
 ```
+The code creates a 3x3 matrix a with the specified values using the numpy library. This, though, produces a differnt filter than the original filter. 
 
 # Apply the new filter using the conv2 function
 ```python
 z = conv2(x, a)
 ```
+This code calls the conv2 function using two arguments: "x" and "a". The function will perform a convolution operation on the matrix "x" using the filter "a". The result of this convolution is assigned to the variable "z".
 
 # Plot the original image
 ```python
 plot(x)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/0f3ec325-abbb-4554-9eb7-cd753109de4b)
+
+Plots the image. 
 
 # Plot the convoluted image using the new filter
 ```python
 plot(z)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/355ef96e-27f4-48f6-914f-33a0e3b8e9ce)
+
+This plots the convoluted image with the new filter.
 
 # Generate and apply 10 random filters and display the convoluted images
 ```python
@@ -158,6 +191,18 @@ for i in range(10):
     z = conv2(x, a)  # Convolve the image with the random filter
     plot(z)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/40b1e50f-98b7-4529-810b-f8e45ad370b1)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/64ead78f-a879-4c83-84f6-854d517ecd4a)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/6216ee20-d2d1-443d-bd42-994694c97afd)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/cf066b4d-cdbb-4579-a1be-12c01b283097)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/91522ce1-93d9-4164-9d9a-2dc02a5335d5)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/b0990595-f52e-4f6b-a363-c35a3b48510b)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/ce596ea9-c159-46b8-a967-2c1bf6769ef4)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/3c25ea81-2aa8-4e2f-bd5f-934cc5c6350a)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a9b55a4a-0dd7-45c2-b3f4-168606f664da)
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/5a47f778-cfba-40c2-abd8-401550b1cdb1)
+
+The code will display 10 different convolved versions of the image x using 10 randomly generated filters.
 
 # Load the image again for further processing
 ```python
