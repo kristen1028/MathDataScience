@@ -222,19 +222,9 @@ The code fetches an image from a specified URL and then converts it to grayscale
 ```python
 for i in range(10):
     a = 2 * np.random.random((3, 3)) - 1
-    print(a)
+    plot(a)
     z = convolve2d(x, a, mode='valid')  # 2D convolution
-    plot(z)
+    print(z)
 ```
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/dd210553-eb4c-4931-abe7-0988bc4fb2ce)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/86382619-8534-4e28-b5ae-cf8567347c1e)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/4cbe72cd-cb7b-49e9-a2ed-744833a32299)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/ae4f55e1-8cc6-4484-b753-7fda294ba0ab)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/f6517162-3741-40fd-bbb1-51fa21e6de36)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/fdb64d23-06f0-4b73-9a53-777ab0ce1bac)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a7f52389-a5fc-490b-b79b-d030568519d1)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/c2fc5c97-8fca-4d6c-b62b-ff6823ff58b9)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/4eabd30e-fb38-4134-b6c2-3f5407605a4e)
-![image](https://github.com/kristen1028/MathDataScience/assets/143013164/f3f04502-636b-463a-95b0-47138fe77688)
 
 The code applies 10 random 3x3 filters (convolution kernels) to the grayscale image x and visualizes the output of each convolution.
