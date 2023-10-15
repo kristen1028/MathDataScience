@@ -78,6 +78,12 @@ plot(image_gray)
 
 The code converts the resized color image (image_resize) to grayscale by computing the mean of the RGB values across the third dimension (np.mean(image_resize, axis=2)). It then displays the grayscale image using the plot() function.
 
+# Display the shape of the grayscale image
+```python
+image_gray.shape
+```
+This code displays the shape of the new grayscale image. 
+
 # Load the image again for further processing
 ```python
 image = io.imread("https://th.bing.com/th/id/OIP.himN5x0Zvru00xUdk3p55QHaE8?pid=ImgDet&rs=1")
