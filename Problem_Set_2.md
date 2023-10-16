@@ -224,7 +224,7 @@ for i in range(10):
     a = 2 * np.random.random((3, 3)) - 1
     plot(a)
     z = convolve2d(x, a, mode='valid')  # 2D convolution
-    print(z)
+    plot(z)
 ```
 
 The code applies 10 random 3x3 filters (convolution kernels) to the grayscale image x and visualizes the output of each convolution.
