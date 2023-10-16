@@ -193,7 +193,7 @@ This plots the convoluted image with the new filter.
 ```python
 for i in range(10):
     a = 2 * np.random.random((3, 3)) - 1  # Generate a random filter
-    print(a)
+    plot(a)
     z = conv2(x, a)  # Convolve the image with the random filter
     plot(z)
 ```
