@@ -154,8 +154,70 @@ w6 = alexnet.classifier[4].weight.data
 w7 = alexnet.classifier[6].weight.data
 ```
 
-# Perform feature map visualization by convolving the image with filters
-# ... [visualization code using F.conv2d and plotting functions] ...
+# Printing the shapes of img_t and w0 tensors
+```python
+img_t.shape, w0.shape
+```
+
+# Printing the shape of the img_t tensor
+```python
+img_t.shape
+```
+# Printing the shape of the first image tensor in the batch
+```python
+img_t[0,:,:,:].shape
+```
+
+# Function to normalize an image tensor to the range [0, 1]
+```python
+def scale(img):
+    # Determine the maximum and minimum values of the image tensor
+    max_value = img.max()
+    min_value = img.min()
+    # Normalize the image tensor
+    normalized_array = (img - min_value) / (max_value - min_value)
+    return normalized_array
+```
+
+# Function to plot an image tensor
+```python
+def tensor_plot(img_t, index=0):
+    # Convert the specified image tensor to a numpy array
+    numpy_array = img_t[index,:,:,:].cpu().numpy()
+    # Transpose the numpy array from (C, H, W) format to (H, W, C) format for visualization
+    numpy_array_transposed = numpy_array.transpose(1, 2, 0)
+    # Normalize the numpy array using the previously defined scale function
+    numpy_array_transposed = scale(numpy_array_transposed)
+    # Display the image using matplotlib
+    plt.imshow(numpy_array_transposed)
+    plt.show()
+```
+
+# Visualize the specified image tensor using the tensor_plot function
+```python
+tensor_plot(img_t)
+```
+
+# Printing the shape of the w0 tensor
+```python
+w0.shape
+```
+
+# Apply the convolutional operation using the w0 filter on the img_t tensor
+```python
+f0 = F.conv2d(img_t, w0, stride=4, padding=2)
+```
+
+# Printing the shape of the resulting feature map
+```python
+f0.shape
+```
+
+# Displaying the first feature map of the first image in the batch
+```python
+i = 0
+plt.imshow(f0[0,i,:,:].cpu().numpy())
+```
 
 # A function to plot feature maps with overlayed filters
 ```python
