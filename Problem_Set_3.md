@@ -146,7 +146,12 @@ print('Predicted class:', labels[class_idx.item()])
 ```python
 w0 = alexnet.features[0].weight.data
 w1 = alexnet.features[3].weight.data
-# ... [more weights are extracted similarly] ...
+w2 = alexnet.features[6].weight.data
+w3 = alexnet.features[8].weight.data
+w4 = alexnet.features[10].weight.data
+w5 = alexnet.classifier[1].weight.data
+w6 = alexnet.classifier[4].weight.data
+w7 = alexnet.classifier[6].weight.data
 ```
 
 # Perform feature map visualization by convolving the image with filters
