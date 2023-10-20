@@ -58,73 +58,100 @@ def plot(x, title=None):
 ```
 
 # Download and extract the dataset
+```python
 !wget https://gist.githubusercontent.com/JosephKJ/94c7728ed1a8e0cd87fe6a029769cde1/raw/403325f5110cb0f3099734c5edb9f457539c77e9/Oxford-102_Flower_dataset_labels.txt
 !wget https://s3.amazonaws.com/content.udacity-data.com/courses/nd188/flower_data.zip
 !unzip 'flower_data.zip'
+```
 
 # Define the dataset directory and normalization values
+```python
 data_dir = '/content/flower_data/'
 mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
+```
 
 # Define the image transformations for the dataset
+```python
 data_transform = transforms.Compose([
     transforms.RandomResizedCrop(224),
     transforms.ToTensor(),
     transforms.Normalize(mean, std)
 ])
+```
 
 # Load dataset using torchvision's ImageFolder and get the dataset labels
+```python
 dataset = datasets.ImageFolder(os.path.join(data_dir, 'train'), data_transform)
 dataset_labels = pd.read_csv('Oxford-102_Flower_dataset_labels.txt', header=None)[0].str.replace("'", "").str.strip()
+```
 
 # Load dataset into a DataLoader for batching
+```python
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=len(dataset), shuffle=False)
+```
 
 # Extract a batch of images and labels
+```python
 images, labels = next(iter(dataloader))
 
 print(f"Images tensor shape: {images.shape}")
 print(f"Labels tensor shape: {labels.shape}")
+```
 
 # Plot the 50th image in the batch
+```python
 i = 50
 plot(images[i], dataset_labels[i])
+```
 
 # Prepare the device for computations
+```python
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+```
 
 # Load pretrained AlexNet model
+```python
 alexnet = models.alexnet(pretrained=True).to(device)
 labels = {int(key): value for (key, value) in requests.get('https://s3.amazonaws.com/mlpipes/pytorch-quick-start/labels.json').json().items()}
+```
 
 # Image preprocessing for AlexNet model
+```python
 preprocess = transforms.Compose([
    transforms.Resize(256),
    transforms.CenterCrop(224),
    transforms.ToTensor(),
    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
+```
 
 # Convert tensor image back to PIL format
+```python
 from torchvision.transforms import ToPILImage
 to_pil = ToPILImage()
 img = to_pil(images[i])
 img_t = preprocess(img).unsqueeze_(0).to(device)
+```
 
 # Use the pre-trained AlexNet model to classify the image
+```python
 scores, class_idx = alexnet(img_t).max(1)
 print('Predicted class:', labels[class_idx.item()])
+```
 
 # Extract weights from different layers of the AlexNet model
+```python
 w0 = alexnet.features[0].weight.data
 w1 = alexnet.features[3].weight.data
 # ... [more weights are extracted similarly] ...
+```
 
 # Perform feature map visualization by convolving the image with filters
 # ... [visualization code using F.conv2d and plotting functions] ...
 
 # A function to plot feature maps with overlayed filters
+```python
 def plot_feature_maps_with_filters(feature_maps, filters):
     """Plots feature maps with RGB filters overlayed at the lower-left corner.
     
@@ -135,3 +162,4 @@ def plot_feature_maps_with_filters(feature_maps, filters):
     # ... [rest of the function implementation] ...
 
 plot_feature_maps_with_filters(f0, w0)
+```
