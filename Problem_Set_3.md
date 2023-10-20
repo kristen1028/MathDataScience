@@ -238,70 +238,50 @@ import torch
 import matplotlib.pyplot as plt
 
 def plot_feature_maps_with_filters(feature_maps, filters):
-    """
-    Plots a grid of feature maps with corresponding filters overlayed in the bottom-left corner.
-
-    Args:
-        feature_maps (torch.Tensor): A tensor containing feature maps. Shape [N, C, H, W] or [C, H, W].
-        filters (torch.Tensor): A tensor containing the filters that produced the feature maps. Shape [N, C, H, W].
-
-    Returns:
-        None: This function visualizes the feature maps and does not return any values.
-    """
-
-    # If there's a batch dimension in the feature maps tensor, remove it
+    # Remove batch dimension if it exists
     if feature_maps.dim() == 4:
         feature_maps = feature_maps.squeeze(0)
 
-    # Normalize the feature maps to a range between [0, 1]
+    # Normalize feature maps to [0, 1]
     feature_maps = (feature_maps - feature_maps.min()) / (feature_maps.max() - feature_maps.min())
 
     def add_filter_to_feature_map(filter_tensor, feature_map_tensor):
-        """
-        Overlays a filter on the bottom-left corner of a grayscale feature map and returns an RGB image.
-
-        Args:
-            filter_tensor (torch.Tensor): The filter tensor to be overlayed. Shape [C, H, W].
-            feature_map_tensor (torch.Tensor): The feature map tensor where the filter is overlayed. Shape [H, W] or [C, H, W].
-
-        Returns:
-            torch.Tensor: An RGB tensor with the filter overlayed on the feature map.
-        """
-        # Ensure the feature map tensor is 2D
+        # Ensure the feature map is 2D [H, W]
         if feature_map_tensor.dim() > 2:
             feature_map_tensor = feature_map_tensor.squeeze(0)
 
-        # Convert the grayscale feature map to an RGB format by repeating its single channel 3 times
+        # Convert grayscale feature map to RGB by repeating the single channel 3 times
         feature_map_rgb = feature_map_tensor.unsqueeze(0).repeat((3, 1, 1))
 
-        # Normalize the filter tensor to the range [0, 1]
+        # Normalize the filter to [0, 1]
         filter_tensor = (filter_tensor - filter_tensor.min()) / (filter_tensor.max() - filter_tensor.min())
 
-        # Ensure the overlayed filter fits into the feature map. Crop it if necessary
+        # Ensure the filter fits into the feature map
         min_dim = min(feature_map_tensor.shape)
         filter_size = min(filter_tensor.shape[-1], min_dim)
+
+        # Crop the filter if needed
         filter_cropped = filter_tensor[:, :filter_size, :filter_size]
 
-        # Overlay the filter on the bottom-left corner of the feature map
+        # Overlay the RGB filter at the lower-left corner of the feature map
         feature_map_rgb[:, -filter_size:, :filter_size] = filter_cropped
 
-        # Ensure the final values are clamped between [0, 1]
+        # Clip the values to be in the range [0, 1]
         feature_map_rgb = torch.clamp(feature_map_rgb, 0, 1)
 
         return feature_map_rgb
 
-    # Plotting a grid/montage of feature maps
+    # Plot montage of feature maps
     fig, axes = plt.subplots(8, 8, figsize=(15, 15))
 
     for ax, feature_map, filter_ in zip(axes.flat, feature_maps, filters):
-        # Overlay the filter on the feature map
+        # Add RGB filter to grayscale feature map
         modified_feature_map = add_filter_to_feature_map(filter_, feature_map)
 
-        # Display the modified feature map
-        ax.imshow(modified_feature_map.permute(1, 2, 0).cpu().numpy(), interpolation='none')
+        # Plot modified feature map
+        ax.imshow(modified_feature_map.permute(1, 2, 0).cpu().numpy(), interpolation='none')  # Added 'none' interpolation
         ax.axis('off')
 
-    # Show the entire grid of feature maps
     plt.show()
 ```
 
