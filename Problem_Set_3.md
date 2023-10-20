@@ -1,5 +1,3 @@
-
-# -*- coding: utf-8 -*-
 """
 Problem Set 3.ipynb
 
@@ -20,6 +18,7 @@ from PIL import Image
 import requests
 import torch.nn.functional as F
 ```
+This code block prepares the environment by importing tools necessary for tasks like data visualization, deep learning, data manipulation, image processing, and web requests.
 
 # Function to plot tensor images
 ```python
@@ -56,6 +55,7 @@ def plot(x, title=None):
     fig.set_size_inches(10, 10)
     plt.show()
 ```
+This code creates a visual display of the input image tensor, either in grayscale or RGB format, with an optional title. The size of the displayed image is set to 10x10 inches.
 
 # Download and extract the dataset
 ```python
@@ -63,6 +63,7 @@ def plot(x, title=None):
 !wget https://s3.amazonaws.com/content.udacity-data.com/courses/nd188/flower_data.zip
 !unzip 'flower_data.zip'
 ```
+This code downloads the dataset to be used. 
 
 # Define the dataset directory and normalization values
 ```python
@@ -70,6 +71,7 @@ data_dir = '/content/flower_data/'
 mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
 ```
+The code block specifies a directory path to flower data and sets normalization parameters (mean and standard deviation) for image processing, which are commonly used with pretrained deep learning models.
 
 # Define the image transformations for the dataset
 ```python
@@ -79,17 +81,20 @@ data_transform = transforms.Compose([
     transforms.Normalize(mean, std)
 ])
 ```
+The code block defines an image transformation pipeline that randomly crops the image to a fixed size, converts it into a tensor format, and then normalizes its pixel values using the provided mean and standard deviation. This transformed data is then ready to be fed into a deep learning model.
 
 # Load dataset using torchvision's ImageFolder and get the dataset labels
 ```python
 dataset = datasets.ImageFolder(os.path.join(data_dir, 'train'), data_transform)
 dataset_labels = pd.read_csv('Oxford-102_Flower_dataset_labels.txt', header=None)[0].str.replace("'", "").str.strip()
 ```
+This code block performs two tasks. The first task it performs is making sure that when you retrieve an image from this dataset, it will be automatically cropped to a size of 224x224, converted to a tensor, and normalized using the specified 'mean' and 'std'. The second task it performs is it reads a text file named 'Oxford-102_Flower_dataset_labels.txt' to extract the labels for the dataset. 
 
 # Load dataset into a DataLoader for batching
 ```python
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=len(dataset), shuffle=False)
 ```
+This code sets up a DataLoader that will provide the entire dataset in a single batch without any shuffling.
 
 # Extract a batch of images and labels
 ```python
@@ -98,6 +103,7 @@ images, labels = next(iter(dataloader))
 print(f"Images tensor shape: {images.shape}")
 print(f"Labels tensor shape: {labels.shape}")
 ```
+This code retrieves all the images and labels from the dataset using the DataLoader and then prints out the shapes of the retrieved images and labels tensors to provide insights into their dimensions.
 
 # Plot the 50th image in the batch
 ```python
@@ -106,17 +112,20 @@ plot(images[i], dataset_labels[i])
 ```
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a82b0347-656a-43f8-b442-57215ea2f9bb)
 
+This code selects the 51st image (0-indexed, so index 50) from the dataset and displays it with its corresponding label as the title.
 
 # Prepare the device for computations
 ```python
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 ```
+This code is setting up the device variable to specify whether to run subsequent PyTorch operations on the GPU (if available) or the CPU.
 
 # Load pretrained AlexNet model
 ```python
 alexnet = models.alexnet(pretrained=True).to(device)
 labels = {int(key): value for (key, value) in requests.get('https://s3.amazonaws.com/mlpipes/pytorch-quick-start/labels.json').json().items()}
 ```
+The code block loads a pre-trained AlexNet model, moves it to the desired device (GPU or CPU), and fetches the class labels that correspond to the output classes of the model.
 
 # Image preprocessing for AlexNet model
 ```python
@@ -127,6 +136,7 @@ preprocess = transforms.Compose([
    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 ```
+The code block creates a preprocess pipeline using the transforms.Compose() function. This pipeline is designed to take an image, apply the defined transformations in sequence, and produce an output tensor that's ready to be fed into a model like AlexNet.
 
 # Convert tensor image back to PIL format
 ```python
@@ -135,12 +145,14 @@ to_pil = ToPILImage()
 img = to_pil(images[i])
 img_t = preprocess(img).unsqueeze_(0).to(device)
 ```
+The code block takes the 'i'-th image tensor from the batch 'images', converts it to a PIL image, preprocesses it to make it suitable for a model, adds a batch dimension, and then sends it to the appropriate device (either GPU or CPU). The resulting tensor, 'img_t', is now ready to be input to a neural network model.
 
 # Use the pre-trained AlexNet model to classify the image
 ```python
 scores, class_idx = alexnet(img_t).max(1)
 print('Predicted class:', labels[class_idx.item()])
 ```
+The code block uses the 'alexnet' model to predict the class of the image represented by 'img_t', and then it prints out the human-readable name of the predicted class using the labels dictionary.
 
 # Extract weights from different layers of the AlexNet model
 ```python
@@ -153,20 +165,25 @@ w5 = alexnet.classifier[1].weight.data
 w6 = alexnet.classifier[4].weight.data
 w7 = alexnet.classifier[6].weight.data
 ```
+This code uses the AlexNet model to extract weights from the different layers. 
 
 # Printing the shapes of img_t and w0 tensors
 ```python
 img_t.shape, w0.shape
 ```
+This code retrieves the shape of two tensors: 'img_t' and 'w0'. The '.shape' attribute returns the dimensions of a tensor in PyTorch. 
 
 # Printing the shape of the img_t tensor
 ```python
 img_t.shape
 ```
+This code prints the shape of 'img_t'. 
+
 # Printing the shape of the first image tensor in the batch
 ```python
 img_t[0,:,:,:].shape
 ```
+This code retrieves the shape of a subset of the img_t tensor. Specifically, it selects the first element (index 0) along the batch dimension (or the first dimension) and includes all the elements in the other dimensions.
 
 # Function to normalize an image tensor to the range [0, 1]
 ```python
@@ -178,6 +195,7 @@ def scale(img):
     normalized_array = (img - min_value) / (max_value - min_value)
     return normalized_array
 ```
+This function ensures that the pixel values of the image tensor are in the [0, 1] range.
 
 # Function to plot an image tensor
 ```python
@@ -192,11 +210,15 @@ def tensor_plot(img_t, index=0):
     plt.imshow(numpy_array_transposed)
     plt.show()
 ```
+The function takes a tensor of images and an index, and it visualizes the specified image from the tensor.
 
 # Visualize the specified image tensor using the tensor_plot function
 ```python
 tensor_plot(img_t)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/60babb27-107e-4540-b75e-cbfe21bff901)
+
+The function call displays the first image from the tensor 'img_t'.
 
 # Printing the shape of the w0 tensor
 ```python
@@ -207,6 +229,7 @@ w0.shape
 ```python
 f0 = F.conv2d(img_t, w0, stride=4, padding=2)
 ```
+'f0', is a tensor containing the feature maps (output) produced by convolving 'img_t' with the filters 'w0'. 
 
 # Printing the shape of the resulting feature map
 ```python
@@ -218,6 +241,9 @@ f0.shape
 i = 0
 plt.imshow(f0[0,i,:,:].cpu().numpy())
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/33a33f26-c61a-4c8e-9aae-8cd560ece574)
+
+The code is visualizing the first feature map of the first image in the batch from the tensor 'f0'.
 
 # A function to plot feature maps with overlayed filters
 ```python
@@ -232,6 +258,7 @@ def plot_feature_maps_with_filters(feature_maps, filters):
 
 plot_feature_maps_with_filters(f0, w0)
 ```
+This code is meant to provide a visual representation of the relationship between convolutional filters and the feature maps they produce, making it easier to understand and interpret the effects of the filters on the original image.
 
 ```python
 import torch
@@ -284,6 +311,7 @@ def plot_feature_maps_with_filters(feature_maps, filters):
 
     plt.show()
 ```
+This function provides a visual way to understand the relationship between convolutional filters and the feature maps they produce. It's particularly useful to see how different filters emphasize or extract specific features from an image. 
 
 # Printing the shape of feature maps tensor 'f0' and filters tensor 'w0'
 ```
@@ -295,3 +323,5 @@ f0.shape, w0.shape
 plot_feature_maps_with_filters(f0, w0)
 ```
 ![image](https://github.com/kristen1028/MathDataScience/assets/143013164/23af2a74-0fcf-4512-a8eb-72631a5748f6)
+
+The code will produce a visualization where each feature map from f0 is displayed, and its corresponding filter from w0 is overlaid on its lower-left corner. This visualization helps in understanding how different filters emphasize or extract specific features from an image.
