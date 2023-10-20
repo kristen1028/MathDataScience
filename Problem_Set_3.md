@@ -104,6 +104,8 @@ print(f"Labels tensor shape: {labels.shape}")
 i = 50
 plot(images[i], dataset_labels[i])
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/a82b0347-656a-43f8-b442-57215ea2f9bb)
+
 
 # Prepare the device for computations
 ```python
