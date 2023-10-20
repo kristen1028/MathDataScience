@@ -294,3 +294,4 @@ f0.shape, w0.shape
 ```python
 plot_feature_maps_with_filters(f0, w0)
 ```
+![image](https://github.com/kristen1028/MathDataScience/assets/143013164/23af2a74-0fcf-4512-a8eb-72631a5748f6)
